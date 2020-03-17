@@ -1,17 +1,18 @@
 name: SCALE Tests
 on:
-  repository_dispatch:
-    types: [run-scale-tests-command]
+  push:
+    branches: [master]
 
 jobs:
   build:
-    runs-on: self-runner
+    runs-on: self-hosted
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
       with:
         submodules: true
+
     - name: Configure
       run: |
         echo $(pwd)
