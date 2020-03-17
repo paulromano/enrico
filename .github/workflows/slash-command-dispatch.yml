@@ -4,7 +4,7 @@ on:
     types: [created]
 
 jobs:
-  build:
+  slashCommandDispatch:
     runs-on: ubuntu-latest
 
     steps:
