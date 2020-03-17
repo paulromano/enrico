@@ -25,8 +25,8 @@ the location of the Nek5000 input deck using the `-DUSR_LOC` flag.  Here is a sa
 
 # Library Targets
 
-In a given case directory, you may also compile coupled and single-physics libraries without a driver.  The available
-targets are:
+In a given case directory, you may also compile coupled and single-physics
+libraries without a driver.  The available targets are:
 * `enrico`: The ENRICO executable
 * `libopenmc`: The OpenMC library
 * `libnek5000`: The Nek5000 library
