@@ -15,4 +15,11 @@ jobs:
 
     - name: Configure
       run: |
-        echo $(pwd)
+        mkdir -p tests/singlerod/short/build
+        cd tests/singlerod/short/build
+        CC=mpicc CXX=mpicxx FC=mpifort cmake -DUSR_LOC=.. -DSCALE_DIR=/opt/scale/6.3-dev ../../../..
+
+    - name: Build
+      run: |
+        cd tests/singlerod/short/build
+        make -j
