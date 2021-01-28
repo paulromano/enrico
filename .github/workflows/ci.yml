@@ -23,22 +23,19 @@ jobs:
       matrix:
         mode: [openmc_nek5000, openmc_nekrs, openmc_heat_surrogate]
 
-    name: '${{ matrix.mode }}'
+    name: "${{ matrix.mode }}"
 
     env:
       MODE: ${{ matrix.mode }}
 
     steps:
-      -
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      -
-        name: Environment Variables
+      - name: Environment Variables
         run: |
           echo "OPENMC_CROSS_SECTIONS=$HOME/endfb71_hdf5/cross_sections.xml" >> $GITHUB_ENV
 
-      -
-        name: Apt dependencies
+      - name: Apt dependencies
         shell: bash
         run: |
           sudo apt -y update
@@ -47,28 +44,24 @@ jobs:
                               libmpich-dev \
                               libhdf5-mpich-dev \
                               liblapack-dev
-      -
-        name: before_install
+      - name: before_install
         shell: bash
         run: $GITHUB_WORKSPACE/ci/patch_singlerod_input.sh
 
-      -
-        name: install
+      - name: install
         shell: bash
         run: |
           $GITHUB_WORKSPACE/ci/cmake_singlerod.sh
           $GITHUB_WORKSPACE/ci/build_singlerod.sh
           $GITHUB_WORKSPACE/ci/build_unittests.sh
 
-      -
-        name: before_script
+      - name: before_script
         shell: bash
         run: |
           $GITHUB_WORKSPACE/ci/download_xs.sh
           $GITHUB_WORKSPACE/ci/unzip_singlerod_statefile.sh
 
-      -
-        name: test
+      - name: test
         shell: bash
         run: |
           $GITHUB_WORKSPACE/ci/singlerod_matrix.sh
